@@ -3,7 +3,7 @@ i = 1001
   product = Product.new(
     product_number: i,
     name: "something",
-    price: 75,
+    price: rand(6..100),
     image_url: "pic_of_something",
     description: "description of something"
   )
