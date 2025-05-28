@@ -3,10 +3,15 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: true,   numericality: { greater_than: 0 } 
   validates :description, length: { maximum: 500 }
 
-  def supplier
-    Supplier.find_by(id: supplier_id)
-  end
+  belongs_to :supplier
+  has_many :images
 
+  def all_images
+    images.each do |image|
+      return image.url
+    end
+  end
+  
   def friendly_created_at
     created_at.strftime("%A, %d %b %Y %l:%M %p")
   end

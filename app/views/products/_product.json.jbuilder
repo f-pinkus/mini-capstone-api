@@ -5,7 +5,7 @@ json.subtotal product.price
 json.tax product.tax
 json.price product.total
 json.is_discounted? product.is_discounted?
-json.image_url product.image_url
+json.images product.all_images
 json.description product.description
-json.supplier product.supplier
+json.supplier product.supplier.name
 json.created_at product.friendly_created_at
