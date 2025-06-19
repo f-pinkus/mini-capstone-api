@@ -19,4 +19,8 @@ Rails.application.routes.draw do
 
   post "/login", controller: "sessions", action: "create"
   delete "/logout", controller: "sessions", action: "destroy"
+
+  get "/orders", controller: "orders", action: "index"
+  get "/orders/:id", controller: "orders", action: "show"
+  post "/orders", controller: "orders", action: "create"
 end
