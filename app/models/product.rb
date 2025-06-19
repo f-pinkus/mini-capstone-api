@@ -5,6 +5,7 @@ class Product < ApplicationRecord
 
   belongs_to :supplier
   has_many :images
+  has_many :orders
 
   def all_images
     images.each do |image|

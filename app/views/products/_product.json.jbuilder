@@ -3,7 +3,7 @@ json.product_number product.product_number
 json.name product.name
 json.subtotal product.price
 json.tax product.tax
-json.price product.total
+json.total product.total
 json.is_discounted? product.is_discounted?
 json.images product.all_images
 json.description product.description

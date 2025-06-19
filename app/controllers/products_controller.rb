@@ -2,14 +2,14 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
 
-    # render json: products
+    # render json: @products
     render :index
   end
 
   def show
     @product = Product.find(params[:id])
 
-    # render json: product
+    # render json: @product
     render :show
   end
 
@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
     )
 
     if @product.valid?
+      # render json: @product
       render :show
     else
       render json: {errors: @product.errors.full_messages}
@@ -41,6 +42,7 @@ class ProductsController < ApplicationController
     )
 
     if @product.valid?
+      # render json: @product
       render :show
     else
       render json: { errors: @product.errors.full_messages }
