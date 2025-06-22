@@ -1,49 +1,42 @@
 class OrdersController < ApplicationController
-  def index
-    if current_user
-      @orders = current_user.orders
+  before_action :authenticate_user
 
-      render json: @orders
-    else
-      render json: {}, status: :unauthorized
-    end
+  def index
+    @orders = current_user.orders
+
+    render json: @orders
   end
 
   def create
-    if current_user
+    product = Product.find(params[:product_id])
 
-      product = Product.find(params[:product_id])
+    subtotal = product.price * params[:quantity].to_i
+    tax = subtotal * 0.08
+    total = tax + subtotal
+    
+    @order = Order.new(
+      user_id: current_user.id, 
+      product_id: params[:product_id],
+      quantity: params[:quantity],
+      subtotal: subtotal,
+      tax: tax,
+      total: total
+    )
 
-      subtotal = product.price * params[:quantity].to_i
-      tax = subtotal * 0.08
-      total = tax + subtotal
-      
-      @order = Order.new(
-        user_id: current_user.id, 
-        product_id: params[:product_id],
-        quantity: params[:quantity],
-        subtotal: subtotal,
-        tax: tax,
-        total: total
-      )
-
-      if @order.save
-        render json: @order, status: :created
-      else
-        render json: { errors: @order.errors.full_messages }, status: :bad_request
-      end
+    if @order.save
+      render json: @order, status: :created
     else
-      render json: {}, status: :unauthorized
+      render json: { errors: @order.errors.full_messages }, status: :bad_request
     end
   end
 
   def show
-    if current_user
-      @order = current_user.orders.find_by(id: params[:id])
+    @order = current_user.orders.find_by(id: params[:id])
 
+    if @order
       render json: @order
     else
-      render json: {}, status: :unauthorized
+      render json: { message: "Not your order!" }
     end
   end
 end
