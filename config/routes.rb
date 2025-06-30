@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   patch "/suppliers/:id", controller: "suppliers", action: "update"
   delete "/suppliers/:id", controller: "suppliers", action: "destroy"
 
-  get "/photos", controller: "images", action: "index"
-  get "/photos/:id", controller: "images", action: "show"
-  post "/photos", controller: "images", action: "create"
+  get "/images", controller: "images", action: "index"
+  get "/images/:id", controller: "images", action: "show"
+  post "/images", controller: "images", action: "create"
 
   post "/signup", controller: "users", action: "create"
 
