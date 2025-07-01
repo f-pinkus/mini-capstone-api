@@ -1,6 +1,7 @@
 json.id product.id
 json.product_number product.product_number
 json.name product.name
+json.categories product.categories
 json.subtotal product.price
 json.tax product.tax
 json.total product.total
