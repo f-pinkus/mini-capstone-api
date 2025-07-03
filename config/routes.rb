@@ -1,29 +1,34 @@
 Rails.application.routes.draw do
-  get "/products", controller: "products", action: "index"
-  get "/products/:id", controller: "products", action: "show"
-  post "/products", controller: "products", action: "create"
-  patch "/products/:id", controller: "products", action: "update"
-  delete "/products/:id", controller: "products", action: "destroy"
+Rails.application.routes.draw do
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  get "/suppliers", controller: "suppliers", action: "index"
-  get "/suppliers/:id", controller: "suppliers", action: "show"
-  post "/suppliers", controller: "suppliers", action: "create"
-  patch "/suppliers/:id", controller: "suppliers", action: "update"
-  delete "/suppliers/:id", controller: "suppliers", action: "destroy"
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
 
-  get "/images", controller: "images", action: "index"
-  get "/images/:id", controller: "images", action: "show"
-  post "/images", controller: "images", action: "create"
+  # Render dynamic PWA files from app/views/pwa/*
+  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  post "/signup", controller: "users", action: "create"
+  # Defines the root path route ("/")
+  # root "posts#index"
+  post "/users" => "users#create"
+  post "/sessions" => "sessions#create"
+  delete "/sessions" => "sessions#destroy"
 
-  post "/login", controller: "sessions", action: "create"
-  delete "/logout", controller: "sessions", action: "destroy"
+  get "/products" => "products#index"
+  post "/products" => "products#create"
+  get "/products/:id" => "products#show"
+  patch "/products/:id" => "products#update"
+  delete "/products/:id" => "products#destroy"
 
-  get "/orders", controller: "orders", action: "index"
-  get "/orders/:id", controller: "orders", action: "show"
-  post "/orders", controller: "orders", action: "create"
+  get "/suppliers" => "suppliers#index"
 
-  get "/cart", controller: "carted_products", action: "index"
-  post "/carted_products", controller: "carted_products", action: "create"
+  get "/carted_products" => "carted_products#index"
+  post "/carted_products" => "carted_products#create"
+  delete "/carted_products/:id" => "carted_products#destroy"
+
+  get "/orders" => "orders#index"
+  post "/orders" => "orders#create"
+  get "/orders/:id" => "orders#show"
 end
