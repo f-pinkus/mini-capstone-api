@@ -81,6 +81,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     database: mini_capstone_api_production
     username: mini_capstone_api
     password: <%= ENV["MINI_CAPSTONE_API_DATABASE_PASSWORD"] %>
