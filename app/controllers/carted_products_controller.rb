@@ -9,12 +9,14 @@ class CartedProductsController < ApplicationController
 
   def create
     carted_product = CartedProduct.create(
-      user_id: current_user.user_id,
+      user_id: current_user.id,
       product_id: params[:product_id],
       quantity: params[:quantity],
       status: "carted",
       order_id: nil
     )
+
+    @carted_product = CartedProduct.includes(:product).find(carted_product.id)
 
     render :show
   end
