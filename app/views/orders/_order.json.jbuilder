@@ -1,13 +1,16 @@
 json.id order.id
+json.user_id order.user_id
 json.subtotal order.subtotal
 json.tax order.tax
 json.total order.total
-json.carted_products order.carted_products, partial: "carted_products/carted_product", as: :carted_product
-# json.carted_products order.carted_products.each do |carted_product|
-#   json.id carted_product.id
-#   json.quantity carted_product.quantity
-#   json.status carted_product.status
-#   json.product carted_product.product
-# end
-json.created_at order.created_at
-json.updated_at order.updated_at
+json.carted_products order.carted_products do |carted_product|
+  json.id carted_product.id
+  json.quantity carted_product.quantity
+  json.product do
+    json.id carted_product.product.id
+    json.name carted_product.product.name
+    json.price carted_product.product.price
+    json.description carted_product.product.description
+    json.primary_image_url carted_product.product.primary_image_url
+  end
+end

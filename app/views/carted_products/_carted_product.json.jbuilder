@@ -4,5 +4,10 @@ json.product carted_product.product
 json.quantity carted_product.quantity
 json.status carted_product.status
 json.order_id carted_product.order_id
-json.created_at carted_product.created_at
-json.updated_at carted_product.updated_at
+json.product do
+  json.id carted_product.product.id
+  json.name carted_product.product.name
+  json.price carted_product.product.price
+  json.description carted_product.product.description
+  json.primary_image_url carted_product.product.primary_image_url
+end 
